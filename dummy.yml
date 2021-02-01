@@ -1,0 +1,17 @@
+workout:
+  between: 25
+  reps: 6
+  series: 6
+  sequence:
+    - name: a1
+    - name: a3
+    - name: a2
+      after: 180
+    - name: g
+      reps: 10
+      after: 90
+    - name: p
+    - name: k2
+      between: 60
+      series: 3
+      reps: 10
