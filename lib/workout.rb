@@ -16,13 +16,15 @@ class Workout
     default_reps = workout['reps']
     default_series = workout['series']
     default_between = workout['between']
+    default_rest_after = workout['rest_after']
 
     @exercices = workout['sequence'].map do |exo|
       Exercice.new(
         name: exo['name'],
         series: exo['series'] || default_series,
         reps: exo['reps'] || default_reps,
-        rest_between: exo['between'] || default_between
+        rest_between: exo['between'] || default_between,
+        rest_after: exo['rest_after'] || default_rest_after
       )
     end
 

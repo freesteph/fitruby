@@ -1,12 +1,13 @@
 describe Exercice do
-  subject { Exercice.new(series: 3, reps: 5, rest_between: 5, name: "a2") }
-
   attrs = {
     series: 3,
     reps: 5,
     rest_between: 5,
-    name: "a2"
+    name: "a2",
+    rest_after: 30
   }
+
+  subject { Exercice.new(attrs) }
 
   attrs.each do |attr, val|
     it "parses #{attr} correctly" do

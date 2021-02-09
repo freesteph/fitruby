@@ -1,7 +1,7 @@
 require_relative './workout.rb'
 require 'colorize'
 
-path = File.expand_path('../../dummy.yml', __FILE__)
+path = ARGV.first
 
 class ExerciceLogger
   def self.log(ex, &block)
@@ -43,14 +43,17 @@ class Runner
     case ex.state
     when :resting
       ExerciceLogger.log(ex) { "Rest for #{ex.rest_between} seconds..." }
-      # sleep ex.rest_between
-      gets
-
+      sleep ex.rest_between
       puts "\a"
 
       ex.next!
     when :finished
       ExerciceLogger.log(ex) { "Finished, well done." }
+
+      unless ex.rest_after.nil?
+        ExerciceLogger.log(ex) { "Final rest of #{ex.rest_after} seconds..." }
+        sleep ex.rest_after
+      end
 
       puts "WORKOUT IS #{@workout.percentage}% DONE".red
 

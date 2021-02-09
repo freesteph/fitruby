@@ -6,7 +6,7 @@ class Exercice
   attr_accessor :reps,
                 :series,
                 :rest_between,
-                :rest_before,
+                :rest_after,
                 :name,
                 :state,
                 :accomplished,
@@ -14,13 +14,14 @@ class Exercice
 
   STATES = %i[pending active resting finished].freeze
 
-  def initialize(series:, reps:, rest_between:, name:)
+  def initialize(series:, reps:, rest_between:, name:, rest_after:)
     @state = :pending
 
     @series = series
     @name = name
     @reps = reps
     @rest_between = rest_between
+    @rest_after = rest_after
 
     @accomplished = 0
     @serie = 1

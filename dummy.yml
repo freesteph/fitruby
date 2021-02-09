@@ -1,7 +1,8 @@
 workout:
   between: 25
-  reps: 6
+  reps: 8
   series: 6
+  rest_after: 25
   sequence:
     - name: a1
     - name: a3
