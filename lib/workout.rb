@@ -24,7 +24,8 @@ class Workout
         series: exo['series'] || default_series,
         reps: exo['reps'] || default_reps,
         rest_between: exo['between'] || default_between,
-        rest_after: exo['rest_after'] || default_rest_after
+        rest_after: exo['rest_after'] || default_rest_after,
+        skip: exo['skip']
       )
     end
 

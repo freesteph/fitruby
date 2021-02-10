@@ -51,6 +51,16 @@ describe Exercice do
         expect(subject.finished?).to be_truthy
       end
     end
+
+    context "when the state is skipped" do
+      before do
+        subject.state = :skipped
+      end
+
+      it "is true" do
+        expect(subject.finished?).to be_truthy
+      end
+    end
   end
 
   describe "states" do
@@ -65,6 +75,16 @@ describe Exercice do
 
       it "moves to active when next! is called the first time" do
         expect { subject.next! }.to change { subject.state }.to :active
+      end
+
+      context "when the exercice is skipped" do
+        before do
+          subject.skip = "some reason"
+        end
+
+        it "goes straight to skipped" do
+          expect { subject.next! }.to change { subject.state }.to :skipped
+        end
       end
     end
 
@@ -104,6 +124,16 @@ describe Exercice do
       subject.series = 2
 
       expect(subject.percentage).to eq 50
+    end
+
+    context "when the exercice is skipped" do
+      before do
+        subject.state = :skipped
+      end
+
+      it "is 100" do
+        expect(subject.percentage).to eq 100
+      end
     end
   end
 end

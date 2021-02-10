@@ -5,6 +5,7 @@ workout:
   rest_after: 25
   sequence:
     - name: a1
+      skip: neck problem
     - name: a3
     - name: a2
       after: 180

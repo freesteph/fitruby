@@ -10,11 +10,12 @@ class Exercice
                 :name,
                 :state,
                 :accomplished,
-                :serie
+                :serie,
+                :skip
 
   STATES = %i[pending active resting finished].freeze
 
-  def initialize(series:, reps:, rest_between:, name:, rest_after:)
+  def initialize(series:, reps:, rest_between:, name:, rest_after:, skip: nil)
     @state = :pending
 
     @series = series
@@ -25,6 +26,7 @@ class Exercice
 
     @accomplished = 0
     @serie = 1
+    @skip = skip
   end
 
   def run!
@@ -32,6 +34,7 @@ class Exercice
   end
 
   def finished?
+    state == :skipped ||
     state != :pending &&
       @accomplished == @series &&
       @serie = @series
@@ -50,7 +53,7 @@ class Exercice
   def next!
     case @state
     when :pending
-      @state = :active
+      @state = skip ? :skipped : :active
     when :active
       @accomplished += 1
 
@@ -70,6 +73,10 @@ class Exercice
   end
 
   def percentage
-    ((@accomplished * 1.0 / @series) * 100).round
+    if state == :skipped
+      100
+    else
+      ((@accomplished * 1.0 / @series) * 100).round
+    end
   end
 end

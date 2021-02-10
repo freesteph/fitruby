@@ -47,6 +47,10 @@ class Runner
       puts "\a"
 
       ex.next!
+    when :skipped
+      ExerciceLogger.log(ex) { "Skipping: #{ex.skip}..." }
+
+      @workout.current.next!
     when :finished
       ExerciceLogger.log(ex) { "Finished, well done." }
 
