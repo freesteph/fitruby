@@ -1,5 +1,5 @@
 describe Workout do
-  subject { Workout.new(File.expand_path("../../dummy.yml", __FILE__)) }
+  subject { Workout.new(File.expand_path("../dummy.yml", __FILE__)) }
 
   before do
     @ex = instance_double("Exercice")
@@ -13,7 +13,8 @@ describe Workout do
   end
 
   it "can enforce default properties" do
-    Workout.new(File.expand_path("../../dummy.yml", __FILE__))
+    # call again to catch spy
+    Workout.new(File.expand_path("../dummy.yml", __FILE__))
 
     expect(Exercice).to have_received(:new).at_least(1).times.with(a_hash_including(series: 6))
   end
